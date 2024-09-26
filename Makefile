@@ -5,7 +5,6 @@ SOURCES 		= ft_printchar.c \
 					ft_printnbr.c \
 					ft_printptr.c \
 					ft_printstr.c \
-					ft_printpercent.c \
 					ft_unsigned.c \
 					ft_hex.c \
 

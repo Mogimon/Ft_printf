@@ -4,27 +4,21 @@ void	ft_classify(va_list args, char c)
 {
 	// (void) args;
 	if (c == '%')
-		write(1, "%", 1);
+		write(1, "%%", 1);
 	else if ((c == 'd') || (c == 'i') || (c == 'u'))
-		write(1, "deci", 4);
+		ft_printnbr(va_arg(args, int));
 	else if ((c == 'x') || (c == 'X'))
-		{
-			printf("%d\n", va_arg(args, int));
-			ft_hex(va_arg(args, int), c);
-		}
+		printf("%d", va_arg(args, int));
+		// ft_hex(va_arg(args, unsigned int), c);
 	else if (c == 'c')
 		ft_printchar(va_arg(args, int));
 	else if (c == 's')
-		{
-			// char	*str;
-
-			// str = va_arg(args, char *);
-			// while (*str != '\0')
-			// 	write(1, str++, 1);
-			//ft_printstr(va_arg(args, char *));
-		}
+		// write(1, "A", 1);
+		 printf("%s", va_arg(args, char *));
+		// // ft_printstr(va_arg(args, char *));
+		// }
 	else if (c == 'p')
-		write(1, "ptr", 3);
+		ft_printptr(va_arg(args, unsigned long long));
 }
 int ft_printf(const char *format, ...)
 {
@@ -63,8 +57,10 @@ int	sum (int count, ...)
 }
 int	main (void)
 {
-	printf("sum of %%, %c, %s, %x, %X = %d\n", 'A', "hello", 10, 10, sum(3, 3, 4, 6));
-	ft_printf("sum of %%, %c, %s, %x, %X = %d\n", 'A', "hello", 10, 10, sum(3, 3, 4, 6));
+	// char	*a = "sdf";
+
+	printf("sum of %%, %c, %x, %X = %d \n", 'A', 10, 10, sum(3, 3, 4, 6));
+	ft_printf("sum of %%, %c, %x, %X = %d \n", 'A', 10, 10, sum(3, 3, 4, 6));
 
 	return (0);
 }

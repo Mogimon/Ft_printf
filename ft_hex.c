@@ -1,10 +1,10 @@
 #include "ft_printf.h"
 
-int	ft_hex(unsigned int num, const char c)
+int	ft_hex(unsigned long long num, const char c)
 {
 	int	count;
 
-	// printf("%u, %c\n", num, c);
+	// printf("%llu, %c\n", num, c);
 	count = 0;
 	if (num >= 16)
 	{
