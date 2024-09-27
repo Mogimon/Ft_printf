@@ -1,30 +1,30 @@
 #include "ft_printf.h"
 
-void	ft_classify(va_list args, char c)
+int ft_classify(va_list args, char c)
 {
-	// (void) args;
+	int	len;
+
+	len = 0;
 	if (c == '%')
-		write(1, "%%", 1);
-	else if ((c == 'd') || (c == 'i') || (c == 'u'))
-		ft_printnbr(va_arg(args, int));
+		len += write(1, "%%", 1);
+	else if ((c == 'd') || (c == 'i'))
+		len += ft_printnbr(va_arg(args, int));
 	else if ((c == 'x') || (c == 'X'))
-		printf("%d", va_arg(args, int));
-		// ft_hex(va_arg(args, unsigned int), c);
+		len += ft_hex(va_arg(args, unsigned int), c);
 	else if (c == 'c')
-		ft_printchar(va_arg(args, int));
+		len += ft_printchar(va_arg(args, int));
 	else if (c == 's')
-		// write(1, "A", 1);
-		 printf("%s", va_arg(args, char *));
-		// // ft_printstr(va_arg(args, char *));
-		// }
+		len += ft_printstr(va_arg(args, char *));
 	else if (c == 'p')
-		ft_printptr(va_arg(args, unsigned long long));
+		len += ft_printptr(va_arg(args, unsigned long long));
+	else if (c == 'u')
+		len += ft_unsigned(va_arg(args, unsigned int));
+	return (len);
 }
 int ft_printf(const char *format, ...)
 {
 	int	i;
 	int	len;
-	// t_printf	tab;
 	va_list	args;
 
 	va_start(args, format);
@@ -33,9 +33,9 @@ int ft_printf(const char *format, ...)
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
-			ft_classify(args, format[++i]);
+			len += ft_classify(args, format[++i]);
 		else
-			write(1, &format[i], 1);
+			len += write(1, &format[i], 1);
 		i++;
 	}
 	va_end(args);
@@ -57,10 +57,12 @@ int	sum (int count, ...)
 }
 int	main (void)
 {
-	// char	*a = "sdf";
+	char	*a = "sdf";
 
-	printf("sum of %%, %c, %x, %X = %d \n", 'A', 10, 10, sum(3, 3, 4, 6));
-	ft_printf("sum of %%, %c, %x, %X = %d \n", 'A', 10, 10, sum(3, 3, 4, 6));
+	printf("printf sum of %%, %c, %s ", 'A', "hello");
+	printf("%x, %X = %d %p\n", 10, 10, 55, a);
+	ft_printf("printf sum of %%, %c, %s ", 'A', "hello");
+	ft_printf("%x, %X = %d %p\n", 10, 10, 55, a);
 
 	return (0);
 }

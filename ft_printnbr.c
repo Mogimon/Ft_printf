@@ -2,7 +2,7 @@
 
 int	ft_printnbr(int n)
 {
-	unsigned long	num;
+	long	num;
 	int	count;
 
 	num = n;
